@@ -1,0 +1,45 @@
+def nms_pytorch(P : torch.tensor, thresh_iou : float):
+    x1 = P[:, 0]
+    y1 = P[:, 1]
+    x2 = P[:, 2]
+    y2 = P[:, 3]
+    scores = P[:, 4]
+
+    areaBlock = (x2 - x1) * (y2 - y1)
+    sortedOrder = scores.argsort()
+    keepL = []
+
+    while len(sortedOrder) > 0:
+        predIndx = sortedOrder[-1]
+        keepL.append(P[predIndx])
+        sortedOrder = sortedOrder[:-1]
+        if len(sortedOrder == 0):
+            break
+        
+        #Coordinates of BBOxes 
+        xx1 = torch.index_select(x1, dim = 0, index = sortedOrder)
+        xx2 = torch.index_select(x2, dim = 0, index = sortedOrder)
+        yy1 = torch.index_select(y1, dim = 0, index = sortedOrder)
+        yy2 = torch.index_select(y2, dim = 0, index = sortedOrder)
+
+        #coordinates of intersections boxes
+        xx1 = torch.max(xx1, x1[predIndx])
+        xx2 = torch.max(xx2, x2[predIndx])
+        yy1 = torch.max(yy1, y1[predIndx])
+        yy2 = torch.max(yy2, y2[predIndx])
+
+        heightI = xx2 - xx1
+        heightI = torch.clamp(heightI, min = 0.0)
+        widthI = yy2 - yy1
+        widthI = torch.clamp(widthI, min = 0.0)
+
+        intersection = widthI * heightI
+
+        remainAreas = torch.index_select(areaBlock, dim = 0, index = sortedOrder)
+        union = (remainAreas - intersection) + areaBlock[predIndx]
+
+        IoU = intersection/union
+        sortedOrder = sortedOrder[IoU < thresh_iou]
+
+        
+    return keepL
