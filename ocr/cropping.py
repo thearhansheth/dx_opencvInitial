@@ -5,8 +5,8 @@ img = cv.imread("/Users/arhan.sheth/Documents/Codes/DX/Basics/dx_opencvInitial/a
 grayimg = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
 print(grayimg.shape)
 
-img1 = grayimg[130:1080, 110:800]
-img2 = grayimg[130:1050, 800:1380]
+img1 = img[130:1080, 110:800]
+img2 = img[130:1050, 800:1380]
 
 cv.imwrite("image_1.png", img1)
 cv.imwrite("image_2.png", img2)
