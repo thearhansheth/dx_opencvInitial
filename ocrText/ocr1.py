@@ -21,9 +21,11 @@ for cnt in contours:
     x, y, w, h = cv.boundingRect(cnt)
     rect = cv.rectangle(img2, (x, y), (x + w, y + h), (0, 255, 0), 2)
     cropping = img2[y:y+h, x:x+w]
-    
-    file = open("recognizedText.txt", "a")
-    file.write(pytesseract.image_to_string(cropping))
-    file.write("\n")
-    file.close
 
+    file = open("recognizedText.txt", "a")
+    text = pytesseract.image_to_string(cropping)
+
+    #file.write("\n")
+    #file.close
+
+print(text)
