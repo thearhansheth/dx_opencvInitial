@@ -8,8 +8,8 @@ print(grayimg.shape)
 img1 = img[130:1080, 110:800]
 img2 = img[130:1050, 800:1380]
 
-cv.imwrite("image_1.png", img1)
-cv.imwrite("image_2.png", img2)
+cv.imwrite("ocr/image_1.png", img1)
+cv.imwrite("ocr/image_2.png", img2)
 cv.imshow("Image 1", img1)
 cv.imshow("Image 2", img2)
 cv.imshow("Original", img)
