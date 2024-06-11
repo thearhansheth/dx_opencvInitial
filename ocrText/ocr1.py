@@ -2,7 +2,7 @@ import numpy as np
 import cv2 as cv
 import pytesseract
 
-pytesseract.pytesseract.tesseract_cmd = "/Users/arhan.sheth/anaconda3/lib/python3.11/site-packages/pytesseract/pytesseract.py"
+pytesseract.pytesseract.tesseract_cmd = "/opt/homebrew/bin/tesseract"
 img = cv.imread("/Users/arhan.sheth/Documents/Codes/DX/Basics/dx_opencvInitial/ocrText/ocrYellowTest.jpeg")
 grayImg = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
 
@@ -25,7 +25,6 @@ for cnt in contours:
     file = open("recognizedText.txt", "a")
     text = pytesseract.image_to_string(cropping)
 
-    #file.write("\n")
-    #file.close
-
-print(text)
+    file.write(f"{text}\n")
+    print("Done")
+    file.close
