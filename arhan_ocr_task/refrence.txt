@@ -1,0 +1,4 @@
+https://medium.com/intelligentmachines/document-detection-in-python-2f9ffd26bf65
+
+# in above link you will find code which can be helpfull.
+# main goal is to get orginal lefpage and right page cropped from the image.
