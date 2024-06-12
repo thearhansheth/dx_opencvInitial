@@ -10,18 +10,18 @@ import cv2 as cv
 from PIL import Image
 
 # Path to the folder containing images
-folder_path = "/Users/arhan.sheth/Documents/Codes/DX/Basics/dx_opencvInitial/arhan_ocr_task/images/sample_input_images" #sys.argv[1]
-
-# Prepare the path for the output text file within the same folder
-output_file_path = os.path.join(folder_path, 'output.txt')
+folder_path = "/Users/arhan.sheth/Documents/Codes/DX/Basics/dx_opencvInitial/arhan_ocr_task/images/sample_input_images"
+output_path = "/Users/arhan.sheth/Documents/Codes/DX/Basics/dx_opencvInitial/arhan_ocr_task/outputTexts" #sys.argv[1]
 
 # List all image files in the directory assuming they are in JPG format. Modify the extension if different.
 image_files = [os.path.join(folder_path, f) for f in os.listdir(folder_path) if f.endswith('.jpeg')]
 
-# Open the output file to write the extracted text
-with open(output_file_path, 'w') as file:
-    # Iterate through each image file
-    for image_path in image_files:
+i = 1
+for image_path in image_files:
+    # Prepare the path for the output text file within the same folder
+    output_file_path = os.path.join(output_path, f'output{i}.txt')
+    
+    with open(output_file_path, 'w') as file:
         print(image_path)
         # Open the image file
         img = Image.open(image_path)
@@ -31,6 +31,8 @@ with open(output_file_path, 'w') as file:
 
         # Write the extracted text to the output file
         file.write(text)
+        file.close()
+        i+=1
 
 # Print 'done' to indicate completion
 print('done')
