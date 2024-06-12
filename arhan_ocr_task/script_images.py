@@ -11,7 +11,7 @@ from PIL import Image
 
 # Path to the folder containing images
 folder_path = "/Users/arhan.sheth/Documents/Codes/DX/Basics/dx_opencvInitial/arhan_ocr_task/images/sample_input_images"
-output_path = "/Users/arhan.sheth/Documents/Codes/DX/Basics/dx_opencvInitial/arhan_ocr_task/outputTexts" #sys.argv[1]
+output_path = "/Users/arhan.sheth/Documents/Codes/DX/Basics/dx_opencvInitial/arhan_ocr_task/outputTexts"
 
 # List all image files in the directory assuming they are in JPG format. Modify the extension if different.
 image_files = [os.path.join(folder_path, f) for f in os.listdir(folder_path) if f.endswith('.jpeg')]
