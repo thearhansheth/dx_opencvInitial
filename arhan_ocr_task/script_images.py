@@ -24,14 +24,16 @@ for image_path in image_files:
     with open(output_file_path, 'w') as file:
         print(image_path)
         # Open the image file
-        img = Image.open(image_path)
-
+        img = cv.imread(image_path)
+        grayimg = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+        ret, thresh1 = cv.threshold(grayimg, 127, 255, cv.THRESH_BINARY)
         # Extract text from image using pytesseract
-        text = pytesseract.image_to_string(img,config="-l san") # changes it for using other languages
+        text = pytesseract.image_to_string(thresh1, config="-l san") # changes it for using other languages
 
         # Write the extracted text to the output file
         file.write(text)
         file.close()
+        print(f"Output {i} Completed")
         i+=1
 
 # Print 'done' to indicate completion
